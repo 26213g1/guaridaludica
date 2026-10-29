@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+th:fragment="layout(content)">
+<head>
+    <meta charset="UTF-8">
+    <title>Guarida Lúdica - Tu Tienda de Juegos</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tu CSS personalizado -->
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" th:href="@{/css/loader.css}">
+</head>
+<body>
+    <!-- Spinner de carga global para navegación -->
+    <div th:replace="~{fragments/loader :: globalLoader}"></div>
+    <!-- Ejemplo en tu layout de Thymeleaf -->
+    <script th:src="@{/js/loader.js}"></script>
+
+    <!-- Barra de navegación superior -->
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <!-- Contenedor principal -->
+    <div class="container my-4">
+        <div class="row">
+            
+            <!-- 1. Menú lateral para pantallas grandes (Desktop): Categorías + Filtros avanzados -->
+            <aside class="col-lg-3 mb-3 d-none d-lg-block">
+                <!-- Bloque de Categorías (Escritorio) -->
+                <div class="sidebar mb-4">
+                    <h5 class="fw-bold mb-3"><i class="fa-solid fa-list me-2 text-primary"></i> Filtrar por Categorías</h5>
+                    <div id="categorias" class="d-flex flex-column gap-2">
+                        <a href="/" class="nav-link-cat text-dark text-decoration-none py-1">TODAS</a>
+                        <div th:replace="~{fragments/categorias :: lista-categorias}"></div>
+                    </div>
+                </div>
+
+                <!-- Inyectamos los filtros avanzados debajo de las categorías en escritorio -->
+                <div th:replace="~{fragments/filtros-tienda :: filtros-publicos}"></div>
+            </aside>
+
+            <!-- 2. Contenido principal y menús desplegables para móviles -->
+            <main class="col-12 col-lg-9">
+                <h2 class="titulo-seccion-moderno-degradado" th:text="${appConfig.cabeceraInicio}">Cabecera Inicio</h2>
+
+                <!-- Barra de búsqueda general -->
+                <div class="card border-0 shadow-sm mb-3">
+                    <div class="card-body p-2">
+                        <form th:action="@{/buscar}" method="get" class="input-group">
+                            <span class="input-group-text bg-white border-end-0 text-muted">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </span>
+                            <input type="text" name="query" class="form-control border-start-0 ps-0" 
+                                   placeholder="Buscar juegos de mesa..." th:value="${query}">
+                            <button class="btn btn-dark" type="submit">Buscar</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Botones desplegables para móviles (Categorías y Filtros separados para no saturar) -->
+                <div class="d-lg-none mb-3 d-flex flex-column gap-2">
+                    <!-- Desplegable de Categorías Móvil -->
+                    <div>
+                        <button class="btn btn-outline-dark w-100 d-flex justify-content-between align-items-center" 
+                                type="button" 
+                                onclick="let m = document.getElementById('cajaCategoriasMovil'); m.style.display = (m.style.display === 'block' ? 'none' : 'block');">
+                            <span><i class="fa-solid fa-list"></i> Filtrar por Categorías</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div id="cajaCategoriasMovil" class="mt-2" style="display: none;">
+                            <div class="d-flex flex-column gap-2 p-2 bg-white rounded shadow-sm">
+                                <a href="/" class="nav-link-cat text-dark text-decoration-none py-1">TODAS</a>
+                                <div th:replace="~{fragments/categorias :: lista-categorias}"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Desplegable de Filtros Avanzados Móvil -->
+                    <div>
+                        <button class="btn btn-outline-primary w-100 d-flex justify-content-between align-items-center" 
+                                type="button" 
+                                onclick="let f = document.getElementById('cajaFiltrosMovil'); f.style.display = (f.style.display === 'block' ? 'none' : 'block');">
+                            <span><i class="fa-solid fa-filter"></i> Más Filtros (Precio, Jugadores...)</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div id="cajaFiltrosMovil" class="mt-2" style="display: none;">
+                            <!-- Reutilizamos el mismo fragmento de filtros dentro del desplegable móvil -->
+                            <div th:replace="~{fragments/filtros-tienda :: filtros-publicos}"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vista dinámica que se inyecta -->
+                <div th:replace="${content}"></div>
+            </main>
+
+        </div>
+    </div>
+
+    <!-- Pie de página reutilizable -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Scripts independientes para cada scroll -->
+    <script th:src="@{/js/collapseNovedades.js}"></script>
+    <script th:src="@{/js/collapseDestacados.js}"></script>
+</body>
+</html>
