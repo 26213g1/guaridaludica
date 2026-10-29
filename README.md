@@ -1,47 +1,59 @@
-# 🎲 Guarida Lúdica
+# 馃幉 Guarida L煤dica
 
-**Guarida Lúdica** es una aplicación web de comercio electrónico desarrollada con **Spring Boot** y **Spring Security**, diseñada específicamente para la gestión y venta de juegos de mesa y un completo panel de administración para el control de pedidos, stock y usuarios.
+**Guarida L煤dica** es una aplicaci贸n web de comercio electr贸nico desarrollada con **Spring Boot** y **Spring Security**, dise帽ada espec铆ficamente para la gesti贸n y venta de juegos de mesa y un completo panel de administraci贸n para el control de pedidos, stock y usuarios.
 
-## 🚀 Características Principales
+## 馃殌 Caracter铆sticas Principales
 
-* **Catálogo y Compra**: Visualización de juegos de mesa, filtrado por categorías y gestión de carrito/pedidos por parte de los usuarios.
-* **Panel de Administración (`/admin`)**:
-  * Listado avanzado de pedidos con paginación y filtros dinámicos (por estado, rango de fechas y búsqueda por texto/ID/usuario) utilizando **JPA Criteria API**.
+- **Cat谩logo y Compra**: Visualizaci贸n de juegos de mesa, filtrado por categor铆as y gesti贸n de carrito/pedidos por parte de los usuarios.
+- **Panel de Administraci贸n (`/admin`)**:
+  * Listado avanzado de pedidos con paginaci贸n y filtros din谩micos (por estado, rango de fechas y b煤squeda por texto/ID/usuario) utilizando **JPA Criteria API / Specifications**.
   * Control de stock, usuarios y roles.
-* **Seguridad Robusta**:
-  * Autenticación y autorización avanzada mediante **Spring Security**.
-  * Protección contra ataques CSRF y gestión de sesiones segura.
-* **Portabilidad de Base de Datos**: Compatible con **PostgreSQL** y **MySQL** gracias al uso de estándares de persistencia con Spring Data JPA e Hibernate.
+- **Seguridad Robusta**:
+  * Autenticaci贸n y autorizaci贸n avanzada mediante **Spring Security**.
+  * Protecci贸n contra ataques CSRF y gesti贸n de sesiones segura.
+- **Persistencia y Calidad**: Integraci贸n con **PostgreSQL** mediante est谩ndares JPA e Hibernate, optimizado para evitar incoherencias de tipos de datos en la base de datos.
 
-## 🛠️ Tecnologías Utilizadas
+## 馃洜锔?Tecnolog铆as Utilizadas
 
-* **Backend**: Java 17+, Spring Boot
-* **Persistencia**: Spring Data JPA, Hibernate, Criteria API
-* **Seguridad**: Spring Security
-* **Base de Datos**: PostgreSQL / MySQL
-* **Control de Versiones**: Git & GitHub
+- **Backend**: Java 17+, Spring Boot
+- **Persistencia**: Spring Data JPA, Hibernate, Criteria API
+- **Seguridad**: Spring Security
+- **Base de Datos**: PostgreSQL
+- **Control de Versiones**: Git & GitHub
 
-## ⚙️ Configuración y Ejecución
+## 鈿欙笍 Configuraci贸n y Ejecuci贸n
 
 ### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/jmmoraj-jpg/guaridaludica.git
+git clone https://github.com/26213g1/guaridaludica.git
 cd guaridaludica
 ```
 
 ### 2. Configurar la Base de Datos
-Modifica el fichero `src/main/resources/application.properties` para apuntar a tu base de datos (PostgreSQL o MySQL):
-```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/guaridadb
-spring.datasource.username=tu_usuario
-spring.datasource.password=tu_contraseña
+Modifica tus ficheros de configuraci贸n en YAML (`src/main/resources/application-dev.yaml` o `application-prod.yaml`) para apuntar a tu instancia de PostgreSQL:
 
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
+```yaml
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/guaridadb}
+    username: ${SPRING_DATASOURCE_USERNAME:tu_usuario}
+    password: ${SPRING_DATASOURCE_PASSWORD:tu_contrase帽a}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-init-sql: SET timezone TO 'UTC';
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        default_schema: guaridadb
 ```
 
 ### 3. Compilar y Ejecutar
-Puedes ejecutar la aplicación utilizando el Maven Wrapper incluido en el proyecto:
+Puedes ejecutar la aplicaci贸n utilizando el Maven Wrapper incluido en el proyecto:
+
 ```bash
 # En Linux / macOS
 ./mvnw spring-boot:run
@@ -49,22 +61,26 @@ Puedes ejecutar la aplicación utilizando el Maven Wrapper incluido en el proyec
 # En Windows
 mvnw.cmd spring-boot:run
 ```
-La aplicación estará disponible por defecto en: `http://localhost:8080`
 
-## 📂 Estructura del Proyecto
+La aplicaci贸n estar谩 disponible por defecto en: `http://localhost:8080`
+
+## 馃搨 Estructura del Proyecto
+
 ```text
 src/
-├── main/
-│   ├── java/com/shop/guaridaludica/
-│   │   ├── controller/   # Controladores web y de administración
-│   │   ├── model/        # Entidades JPA (Pedido, Usuario, etc.)
-│   │   ├── repository/   # Repositorios Spring Data (con Criteria API)
-│   │   └── service/      # Lógica de negocio
-│   └── resources/
-│       ├── static/       # Archivos CSS, JS e imágenes
-│       ├── templates/    # Vistas HTML / Thymeleaf
-│       └── application.properties
+鈹溾攢鈹€ main/
+鈹?  鈹溾攢鈹€ java/com/shop/guaridaludica/
+鈹?  鈹?  鈹溾攢鈹€ controller/   # Controladores web y de administraci贸n
+鈹?  鈹?  鈹溾攢鈹€ model/        # Entidades JPA (Pedido, Usuario, etc.)
+鈹?  鈹?  鈹溾攢鈹€ repository/   # Repositorios Spring Data (con JPA Specifications)
+鈹?  鈹?  鈹斺攢鈹€ service/      # L贸gica de negocio
+鈹?  鈹斺攢鈹€ resources/
+鈹?      鈹溾攢鈹€ static/       # Archivos CSS, JS e im谩genes
+鈹?      鈹溾攢鈹€ templates/    # Vistas HTML / Thymeleaf
+鈹?      鈹溾攢鈹€ application.yaml
+鈹?      鈹溾攢鈹€ application-dev.yaml
+鈹?      鈹斺攢鈹€ application-prod.yaml
 ```
 
-## 📄 Licencia
-Este proyecto está desarrollado con fines académicos y de portfolio personal.
+## 馃搫 Licencia
+Este proyecto est谩 desarrollado con fines acad茅micos y de portfolio personal.
