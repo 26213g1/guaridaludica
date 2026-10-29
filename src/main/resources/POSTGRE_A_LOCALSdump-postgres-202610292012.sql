@@ -829,7 +829,7 @@ INSERT INTO guaridadb.usuarios VALUES (8, 'Ayudante', 'ayudante@guarida.com', '$
 INSERT INTO guaridadb.usuarios VALUES (9, 'Carlos Martinez', 'carlos.martinez@example.com', '$2a$12$wEoYiMTwOPzHcrzffbntpece3dcjoyaX1CV.Omyajq15pAIQv3Pf2', 'cm', NULL);
 INSERT INTO guaridadb.usuarios VALUES (11, 'Hugo Sanchez', 'hugo.sanchez@example.com', '$2a$12$wEoYiMTwOPzHcrzffbntpece3dcjoyaX1CV.Omyajq15pAIQv3Pf2', 'hs', NULL);
 INSERT INTO guaridadb.usuarios VALUES (12, 'Pedro Lorca', 'pedro.lorca@example.com', '$2a$12$wEoYiMTwOPzHcrzffbntpece3dcjoyaX1CV.Omyajq15pAIQv3Pf2', 'pl', NULL);
-INSERT INTO guaridadb.usuarios VALUES (15, NULL, 'jesus.mora@guarida.com', '$2a$10$TEwjm9ZgsdoqwX9y7bqX..t2q7M3Lh1sSYjo3h6iRQmfvPAI5FwjG', 'jmmoraj', NULL);
+INSERT INTO guaridadb.usuarios VALUES (15, NULL, 'jmmoraj@guarida.com', '$2a$10$yZtrTYkejHfi0vwSmx5nJ.0qiLbDFO/vbUwOpxOQ0prMH06dj3ISS', 'jmmoraj', NULL);
 INSERT INTO guaridadb.usuarios VALUES (23, 'uno1 uno2 uno3', 'uno@guarida.com', '$2a$10$Y4c6wQzm1oEnk1tec4hXpO8OQHmP3K0iWv3GnQ94PsokhnMZHbqKK', 'uno', '698652345');
 
 
