@@ -21,8 +21,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.HUB
-    image: jmmoraj/guarida_app:latest
-    container_name: guarida_app
+    image: jmmoraj/guaridaludica_tienda:latest
+    container_name: guaridaludica_tienda
     restart: always
     ports:
       - "8083:8083"

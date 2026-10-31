@@ -74,11 +74,11 @@ La aplicación estará disponible por defecto en: `http://localhost:8083`
 
 #### Opción B: Mediante Docker y Docker Compose
 
-Si prefieres ejecutar el entorno en contenedores con la imagen oficial de Docker Hub (`jmmoraj/guarida_app`):
+Si prefieres ejecutar el entorno en contenedores con la imagen oficial de Docker Hub (`jmmoraj/guaridaludica_tienda`):
 
 ```bash
 # Construir la imagen de Docker
-docker build -t jmmoraj/guarida_app:latest -f Dockerfile.HUB .
+docker build -t jmmoraj/guaridaludica_tienda:latest -f Dockerfile.HUB .
 
 # Desplegar el contenedor
 docker compose up -d
