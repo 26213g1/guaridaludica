@@ -2,40 +2,65 @@
 
 **Guarida Lúdica** es una aplicación web de comercio electrónico desarrollada con **Spring Boot** y **Spring Security**, diseñada específicamente para la gestión y venta de juegos de mesa y un completo panel de administración para el control de pedidos, stock y usuarios.
 
+🌐 **Demo en vivo**: [https://guaridaludica.onrender.com](https://guaridaludica.onrender.com)
+
 ## 🚀 Características Principales
 
-- **Catálogo y Compra**: Visualización de juegos de mesa, filtrado por categorías y gestión de carrito/pedidos por parte de los usuarios.
-- **Panel de Administración (`/admin`)**:
+* **Catálogo y Compra**: Visualización de juegos de mesa, filtrado por categorías y gestión de carrito/pedidos por parte de los usuarios.
+
+* **Panel de Administración (`/admin`)**:
+
   * Listado avanzado de pedidos con paginación y filtros dinámicos (por estado, rango de fechas y búsqueda por texto/ID/usuario) utilizando **JPA Criteria API / Specifications**.
+
   * Control de stock, gestión de productos, usuarios y roles.
-- **Seguridad Robusta**:
+
+* **Seguridad Robusta**:
+
   * Autenticación y autorización avanzada mediante **Spring Security**.
+
   * Protección contra ataques CSRF y gestión de sesiones segura.
-- **Persistencia y Calidad**: Integración con **PostgreSQL** (compatible con instancias en la nube como **Supabase**) mediante estándares JPA e Hibernate, optimizado para evitar incoherencias de tipos de datos en la base de datos.
-- **Containerización**: Empaquetado y distribución listo para producción utilizando **Docker** y **Docker Compose**.
+
+* **Persistencia y Calidad**: Integración con **PostgreSQL** (compatible con instancias en la nube como **Supabase**) mediante estándares JPA e Hibernate, optimizado para evitar incoherencias de tipos de datos en la base de datos.
+
+* **Containerización y Despliegue**: Empaquetado listo para producción con **Docker** y desplegado en la nube a través de **Render**.
+
+## 🌐 Despliegue en la Nube (Render)
+
+La aplicación se encuentra actualmente desplegada y accesible de forma pública en:
+
+👉 **[https://guaridaludica.onrender.com](https://guaridaludica.onrender.com)**
+
+> **Nota**: Al estar alojada en una instancia gratuita de Render, si no ha recibido visitas recientemente el servidor puede tardar unos 50 segundos en reactivarse en la primera petición.
 
 ## 🔑 Credenciales de Administración por Defecto
 
 El sistema incluye un servicio de inicialización de datos (`DataInitializer`) que crea automáticamente un usuario administrador predeterminado durante el primer arranque si no existe en la base de datos:
 
-- **Email / Usuario**: `admin@guarida.com`
-- **Contraseña**: `admin123`
-- **Rol**: `ADMIN`
+* **Email / Usuario**: `admin@guarida.com`
+
+* **Contraseña**: `admin123`
+
+* **Rol**: `ADMIN`
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **Backend**: Java 21, Spring Boot
-- **Persistencia**: Spring Data JPA, Hibernate, Criteria API
-- **Seguridad**: Spring Security
-- **Base de Datos**: PostgreSQL / Supabase
-- **Contenedores**: Docker, Docker Compose, Docker Hub
-- **Control de Versiones**: Git & GitHub
+* **Backend**: Java 21, Spring Boot
+
+* **Persistencia**: Spring Data JPA, Hibernate, Criteria API
+
+* **Seguridad**: Spring Security
+
+* **Base de Datos**: PostgreSQL / Supabase
+
+* **Contenedores y Despliegue**: Docker, Docker Hub, Render
+
+* **Control de Versiones**: Git & GitHub
 
 ## ⚙️ Configuración y Ejecución
 
 ### 1. Clonar el repositorio
 
-```bash
+```
 git clone https://github.com/26213g1/guaridaludica.git
 cd guaridaludica
 ```
