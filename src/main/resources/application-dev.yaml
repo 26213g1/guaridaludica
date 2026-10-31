@@ -5,12 +5,12 @@ server:
 
 spring:
   datasource:
-    #url: jdbc:postgresql://aws-1-eu-central-1.pooler.supabase.com:6543/postgres?sslmode=require&prepareThreshold=0
-    url: jdbc:postgresql://localhost:5432/postgres
-    #username: postgres.pazftusbmxpdvycstexm
-    username: postgres
-    #password: C0y0t3_02_03_04
-    password: guaridaL02
+    url: jdbc:postgresql://aws-1-eu-central-1.pooler.supabase.com:6543/postgres?sslmode=require&prepareThreshold=0
+    #url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: postgres.pazftusbmxpdvycstexm
+    #username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: C0y0t3_02_03_04
+    #password: ${SPRING_DATASOURCE_PASSWORD:guaridaL02}
     driver-class-name: org.postgresql.Driver
     # Desactivar el almacenamiento en caché de prepared statements para evitar conflictos con el Pooler de Supabase
     hikari:
@@ -37,12 +37,15 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
     show-sql: true
     properties:
       hibernate:
         default_schema: guaridadb
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  sql:
+    init:
+      mode: never
 
 contacto:
   email: "jmmoraj@gmail.com"

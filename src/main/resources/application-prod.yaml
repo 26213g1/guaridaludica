@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:8080}
+  port: ${PORT:8083}
   error:
     include-stacktrace: never
 
@@ -33,11 +33,15 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: false
     properties:
       hibernate:
         default_schema: guaridadb
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  sql:
+    init:
+      mode: never
 
 contacto:
   email: "jmmoraj@gmail.com"

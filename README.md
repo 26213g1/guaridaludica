@@ -7,18 +7,28 @@
 - **Catálogo y Compra**: Visualización de juegos de mesa, filtrado por categorías y gestión de carrito/pedidos por parte de los usuarios.
 - **Panel de Administración (`/admin`)**:
   * Listado avanzado de pedidos con paginación y filtros dinámicos (por estado, rango de fechas y búsqueda por texto/ID/usuario) utilizando **JPA Criteria API / Specifications**.
-  * Control de stock, usuarios y roles.
+  * Control de stock, gestión de productos, usuarios y roles.
 - **Seguridad Robusta**:
   * Autenticación y autorización avanzada mediante **Spring Security**.
   * Protección contra ataques CSRF y gestión de sesiones segura.
-- **Persistencia y Calidad**: Integración con **PostgreSQL** mediante estándares JPA e Hibernate, optimizado para evitar incoherencias de tipos de datos en la base de datos.
+- **Persistencia y Calidad**: Integración con **PostgreSQL** (compatible con instancias en la nube como **Supabase**) mediante estándares JPA e Hibernate, optimizado para evitar incoherencias de tipos de datos en la base de datos.
+- **Containerización**: Empaquetado y distribución listo para producción utilizando **Docker** y **Docker Compose**.
+
+## 🔑 Credenciales de Administración por Defecto
+
+El sistema incluye un servicio de inicialización de datos (`DataInitializer`) que crea automáticamente un usuario administrador predeterminado durante el primer arranque si no existe en la base de datos:
+
+- **Email / Usuario**: `admin@guarida.com`
+- **Contraseña**: `admin123`
+- **Rol**: `ADMIN`
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **Backend**: Java 17+, Spring Boot
+- **Backend**: Java 21, Spring Boot
 - **Persistencia**: Spring Data JPA, Hibernate, Criteria API
 - **Seguridad**: Spring Security
-- **Base de Datos**: PostgreSQL
+- **Base de Datos**: PostgreSQL / Supabase
+- **Contenedores**: Docker, Docker Compose, Docker Hub
 - **Control de Versiones**: Git & GitHub
 
 ## ⚙️ Configuración y Ejecución
@@ -32,7 +42,7 @@ cd guaridaludica
 
 ### 2. Configurar la Base de Datos
 
-Modifica tus ficheros de configuración en YAML (`src/main/resources/application-dev.yaml` o `application-prod.yaml`) para apuntar a tu instancia de PostgreSQL:
+Modifica tus ficheros de configuración en YAML o Properties (`src/main/resources/application-dev.yaml` o `application-prod.yaml`) para apuntar a tu instancia de PostgreSQL o Supabase:
 
 ```yaml
 spring:
@@ -41,21 +51,16 @@ spring:
     username: ${SPRING_DATASOURCE_USERNAME:tu_usuario}
     password: ${SPRING_DATASOURCE_PASSWORD:tu_contraseña}
     driver-class-name: org.postgresql.Driver
-    hikari:
-      connection-init-sql: SET timezone TO 'UTC';
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: false
-    properties:
-      hibernate:
-        default_schema: guaridadb
 ```
 
 ### 3. Compilar y Ejecutar
 
-Puedes ejecutar la aplicación utilizando el Maven Wrapper incluido en el proyecto:
+#### Opción A: Mediante Maven Wrapper
 
 ```bash
 # En Linux / macOS
@@ -65,7 +70,21 @@ Puedes ejecutar la aplicación utilizando el Maven Wrapper incluido en el proyec
 mvnw.cmd spring-boot:run
 ```
 
-La aplicación estará disponible por defecto en: `http://localhost:8080`
+La aplicación estará disponible por defecto en: `http://localhost:8083`
+
+#### Opción B: Mediante Docker y Docker Compose
+
+Si prefieres ejecutar el entorno en contenedores con la imagen oficial de Docker Hub (`jmmoraj/guarida_app`):
+
+```bash
+# Construir la imagen de Docker
+docker build -t jmmoraj/guarida_app:latest -f Dockerfile.HUB .
+
+# Desplegar el contenedor
+docker compose up -d
+```
+
+La aplicación estará disponible en: `http://localhost:8083` (o según tu mapeo de puertos en `docker-compose.yml`).
 
 ## 📂 Estructura del Proyecto
 
@@ -73,8 +92,9 @@ La aplicación estará disponible por defecto en: `http://localhost:8080`
 src/
 ├── main/
 │   ├── java/com/shop/guaridaludica/
+│   │   ├── config/       # Configuración de seguridad, inicialización (DataInitializer) y beans
 │   │   ├── controller/   # Controladores web y de administración
-│   │   ├── model/        # Entidades JPA (Pedido, Usuario, etc.)
+│   │   ├── model/        # Entidades JPA (Pedido, Usuario, Producto, etc.)
 │   │   ├── repository/   # Repositorios Spring Data (con JPA Specifications)
 │   │   └── service/      # Lógica de negocio
 │   └── resources/
@@ -83,6 +103,8 @@ src/
 │       ├── application.yaml
 │       ├── application-dev.yaml
 │       └── application-prod.yaml
+├── Dockerfile.HUB
+└── docker-compose.yml
 ```
 
 ## 📄 Licencia
